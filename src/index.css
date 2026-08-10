@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bg text-ink font-body;
+  }
+}
+
+@layer components {
+  .chip {
+    @apply font-mono text-[12.5px] px-3.5 py-2 rounded-full border border-border text-muted bg-white transition-colors cursor-pointer whitespace-nowrap;
+  }
+  .chip:hover {
+    @apply border-accent/50 text-navy;
+  }
+  .chip.active {
+    @apply bg-navy border-navy text-white;
+  }
+}

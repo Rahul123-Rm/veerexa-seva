@@ -1,0 +1,332 @@
+import { useMemo, useState } from 'react'
+import {
+  Search, Sun, Download, Newspaper, FileText, Calculator, Wrench, Landmark,
+  Shield, HeartHandshake, BookOpen, Printer, AlertCircle, Info, ChevronRight,
+  PiggyBank, CircleDollarSign, TrendingUp, Receipt, FileSpreadsheet, BadgePercent, Timer, X
+} from 'lucide-react'
+import {
+  SOFTWARE_LIST, HIGHLIGHTS, BANK_STATUS, QUICK_LINKS, LATEST_NEWS,
+  CALCULATORS, IMPORTANT_DATES, GOVT_SCHEMES, HELP_GUIDES, NAV_LINKS
+} from './data.js'
+import SoftwarePage from './SoftwarePage.jsx'
+
+const ICONS = {
+  Download, Newspaper, FileText, Calculator, Wrench, Search, Landmark,
+  Shield, HeartHandshake, BookOpen, Printer, AlertCircle, Info,
+  PiggyBank, CircleDollarSign, TrendingUp, Receipt, FileSpreadsheet, BadgePercent, Timer,
+}
+
+function Icon({ name, className }) {
+  const C = ICONS[name] || Info
+  return <C className={className} />
+}
+
+function AdSlot({ w, h, label }) {
+  return (
+    <div className="border border-dashed border-border rounded-lg bg-surface2 flex items-center justify-center text-muted text-sm" style={{ minHeight: h }}>
+      {label || `${w} x ${h}`}
+    </div>
+  )
+}
+
+function Card({ title, viewAllHref = "#", children }) {
+  return (
+    <div className="bg-white border border-border rounded-xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-display font-semibold text-[15px] text-ink">{title}</h3>
+        <a href={viewAllHref} className="text-[12.5px] text-accent font-medium hover:underline">View All</a>
+      </div>
+      {children}
+    </div>
+  )
+}
+
+export default function App() {
+  const [searchTerm, setSearchTerm] = useState("")
+  const [currentPage, setCurrentPage] = useState("home")
+
+  const bankStatusColor = s => s === "Working" ? "text-ok" : "text-rose-600"
+  const bankDotColor = s => s === "Working" ? "bg-ok" : "bg-rose-600"
+
+  const newSoftware = useMemo(() => SOFTWARE_LIST.filter(s => s.tag === "NEW").slice(0, 4), [])
+  const popularDownloads = useMemo(() => SOFTWARE_LIST.slice(0, 5), [])
+
+  return (
+    <div className="min-h-screen bg-bg">
+      {/* HEADER */}
+      <header className="bg-white border-b border-border sticky top-0 z-30">
+        <div className="max-w-6xl mx-auto px-5 py-3 flex items-center gap-6">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-navy flex items-center justify-center">
+              <Landmark className="w-5 h-5 text-accent2" />
+            </div>
+            <div className="leading-tight">
+              <div className="font-display font-extrabold text-lg text-navy tracking-tight">VEEREXA</div>
+              <div className="text-[10px] text-muted -mt-0.5">for CSP &amp; Banking Services</div>
+            </div>
+          </div>
+
+          <div className="flex-1 max-w-xl hidden md:flex items-center gap-2 bg-surface2 border border-border rounded-lg px-3 py-2">
+            <Search className="w-4 h-4 text-muted" />
+            <input
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              placeholder="Search IFSC, Bank, Software, Tools, Forms..."
+              className="flex-1 bg-transparent outline-none text-[13.5px] text-ink placeholder:text-muted"
+            />
+            <button className="bg-accent hover:bg-accent/90 text-white text-[12.5px] font-medium px-3.5 py-1.5 rounded-md flex items-center gap-1">
+              <Search className="w-3.5 h-3.5" /> Search
+            </button>
+          </div>
+
+          <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
+            <a href="#" className="hidden sm:inline hover:text-navy">About Us</a>
+            <a href="#" className="hidden sm:inline hover:text-navy">Contact Us</a>
+            <Sun className="w-4 h-4 hidden sm:block hover:text-navy cursor-pointer" />
+            <button className="bg-navy text-white text-[13px] font-medium px-4 py-1.5 rounded-md">Login</button>
+          </div>
+        </div>
+        <nav className="border-t border-border">
+          <div className="max-w-6xl mx-auto px-5 flex items-center gap-6 overflow-x-auto text-[13px] text-muted font-medium">
+            {NAV_LINKS.map((link, i) => (
+              <a
+                key={link}
+                href="#"
+                onClick={(e) => {
+                  if (link === "Software") {
+                    e.preventDefault();
+                    setCurrentPage("software");
+                  } else if (link === "Home") {
+                    e.preventDefault();
+                    setCurrentPage("home");
+                  }
+                }}
+                className={"py-2.5 whitespace-nowrap border-b-2 " + ((currentPage === 'home' && link === 'Home') || (currentPage === 'software' && link === 'Software') ? "text-accent border-accent" : "border-transparent hover:text-navy")}
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </header>
+
+      {currentPage === 'software' ? (
+        <SoftwarePage />
+      ) : (
+        <div className="max-w-6xl mx-auto px-5 py-5 space-y-5">
+
+          {/* TOP: HIGHLIGHTS + AD */}
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4">
+            <Card title="TODAY'S HIGHLIGHTS">
+              <ul className="divide-y divide-border">
+                {HIGHLIGHTS.map((h, i) => (
+                  <li key={i} className="flex items-center gap-3 py-2.5">
+                    <span className={"text-[10px] font-semibold text-white px-2 py-0.5 rounded " + h.tagColor}>{h.tag}</span>
+                    <span className="flex-1 text-[13px] text-ink">{h.text}</span>
+                    <span className="text-[11px] text-muted whitespace-nowrap">{h.time}</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <AdSlot w={300} h={250} />
+          </div>
+
+          {/* QUICK LINKS ROW */}
+          <div className="bg-white border border-border rounded-xl py-6 px-4">
+            <div className="grid grid-cols-3 sm:grid-cols-7 gap-4 text-center">
+              {QUICK_LINKS.map((q, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  onClick={(e) => {
+                    if (q.label === "Software\nDownload") {
+                      e.preventDefault();
+                      setCurrentPage("software");
+                    }
+                  }}
+                  className="flex flex-col items-center gap-2 group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-surface2 group-hover:bg-accent/10 flex items-center justify-center transition-colors">
+                    <Icon name={q.icon} className="w-5 h-5 text-accent" />
+                  </div>
+                  <span className="text-[12px] text-ink font-medium whitespace-pre-line leading-tight">{q.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* SOFTWARE / DOWNLOADS */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Card title="New Software">
+              <ul className="divide-y divide-border">
+                {newSoftware.map((s, i) => (
+                  <li key={i} className="flex items-center gap-3 py-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
+                      <Landmark className="w-4 h-4 text-navy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] text-ink font-medium truncate">{s.name}</span>
+                        <span className="text-[9.5px] font-semibold text-white bg-emerald-600 px-1.5 py-0.5 rounded">NEW</span>
+                      </div>
+                      <span className="text-[11px] text-muted">{s.time || "a few hours ago"}</span>
+                    </div>
+                    <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-accent shrink-0">
+                      <Download className="w-4 h-4" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card title="Popular Downloads">
+              <ul className="divide-y divide-border">
+                {popularDownloads.map((s, i) => (
+                  <li key={i} className="flex items-center gap-3 py-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
+                      <Landmark className="w-4 h-4 text-navy" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <span className="text-[13px] text-ink font-medium block truncate">{s.name}</span>
+                      <span className="text-[11px] text-muted">{s.version} {s.size ? "| " + s.size : ""}</span>
+                    </div>
+                    <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-accent shrink-0">
+                      <Download className="w-4 h-4" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+
+          {/* TOOLS & CALCULATORS + NEWSLETTER + AD */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="lg:col-span-2 bg-white border border-border rounded-xl p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-display font-semibold text-[15px] text-ink">Tools &amp; Calculators</h3>
+                <a href="#" className="text-[12.5px] text-accent font-medium hover:underline">View All</a>
+              </div>
+              <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 text-center">
+                {CALCULATORS.map((c, i) => (
+                  <a key={i} href="#" className="flex flex-col items-center gap-2 group">
+                    <div className="w-11 h-11 rounded-xl bg-surface2 group-hover:bg-accent/10 flex items-center justify-center transition-colors">
+                      <Icon name={c.icon} className="w-4.5 h-4.5 text-accent" />
+                    </div>
+                    <span className="text-[11px] text-ink font-medium leading-tight">{c.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white border border-border rounded-xl p-4">
+              <h3 className="font-display font-semibold text-[15px] text-ink mb-1.5">Stay Updated</h3>
+              <p className="text-[12.5px] text-muted mb-3">Get latest updates, news and software directly in your inbox.</p>
+              <div className="flex gap-2">
+                <input placeholder="Enter your email" className="flex-1 border border-border rounded-md px-3 py-2 text-[13px] outline-none focus:border-accent" />
+                <button className="bg-accent hover:bg-accent/90 text-white text-[13px] font-medium px-3.5 rounded-md">Subscribe</button>
+              </div>
+              <p className="text-[11px] text-muted mt-2">We respect your privacy.</p>
+            </div>
+          </div>
+
+          <AdSlot w={728} h={90} />
+
+          {/* DATES / SCHEMES / GUIDES */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <Card title="Important Dates">
+              <ul className="space-y-2.5">
+                {IMPORTANT_DATES.map((d, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <ChevronRight className="w-3.5 h-3.5 text-accent mt-0.5 shrink-0" />
+                    <div>
+                      <p className="text-[13px] text-ink leading-snug">{d.title}</p>
+                      <span className="text-[11px] text-muted">{d.date}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card title="Government Schemes">
+              <ul className="space-y-3">
+                {GOVT_SCHEMES.map((s, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
+                      <Icon name={s.icon} className="w-4 h-4 text-navy" />
+                    </div>
+                    <div>
+                      <p className="text-[13px] text-ink font-medium">{s.title}</p>
+                      <a href="#" className="text-[11px] text-accent hover:underline">Read More</a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card title="Help & Guides">
+              <ul className="space-y-3">
+                {HELP_GUIDES.map((g, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
+                      <Icon name={g.icon} className="w-4 h-4 text-navy" />
+                    </div>
+                    <div>
+                      <p className="text-[13px] text-ink font-medium">{g.title}</p>
+                      <span className="text-[11px] text-muted">{g.sub}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </div>
+      )}
+
+      {/* FOOTER */}
+      <footer className="bg-navy text-slate-300 mt-6">
+        <div className="max-w-6xl mx-auto px-5 py-10 grid grid-cols-2 sm:grid-cols-5 gap-8">
+          <div className="col-span-2 sm:col-span-1">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                <Landmark className="w-4 h-4 text-accent2" />
+              </div>
+              <span className="font-display font-extrabold text-white">VEEREXA</span>
+            </div>
+            <p className="text-[12px] text-slate-400 leading-relaxed">Your trusted partner for all CSP, banking services, software, news and much more.</p>
+          </div>
+          <div>
+            <h5 className="text-white font-semibold text-[13px] mb-3">Quick Links</h5>
+            <ul className="space-y-2 text-[12.5px]">
+              <li><a href="#" className="hover:text-white">About Us</a></li>
+              <li><a href="#" className="hover:text-white">Contact Us</a></li>
+              <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-white">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="text-white font-semibold text-[13px] mb-3">Useful Links</h5>
+            <ul className="space-y-2 text-[12.5px]">
+              <li><a href="#" className="hover:text-white">IFSC Code Finder</a></li>
+              <li><a href="#" className="hover:text-white">PIN Code Finder</a></li>
+              <li><a href="#" className="hover:text-white">All Banks List</a></li>
+              <li><a href="#" className="hover:text-white">Bank Holidays</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="text-white font-semibold text-[13px] mb-3">Popular Categories</h5>
+            <ul className="space-y-2 text-[12.5px]">
+              <li><a href="#" className="hover:text-white">SBI CSP Software</a></li>
+              <li><a href="#" className="hover:text-white">PNB CSP Software</a></li>
+              <li><a href="#" className="hover:text-white">BOB CSP Software</a></li>
+              <li><a href="#" className="hover:text-white">AEPS Services</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-white/10 py-4 text-center text-[11.5px] text-slate-400">
+          © 2026 Veerexa. All Rights Reserved.
+        </div>
+      </footer>
+    </div>
+  )
+}
