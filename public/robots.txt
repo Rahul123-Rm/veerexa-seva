@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kiosk-software.veerexa.com/sitemap.xml

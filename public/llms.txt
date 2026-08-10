@@ -1,0 +1,24 @@
+# Veerexa Kiosk Software Download Center
+
+> Veerexa is a trusted platform for CSP (Customer Service Point) operators in India. We provide verified, safe, and up-to-date kiosk banking software downloads for all major banks including SBI, PNB, Bank of Baroda, Bank of India, and more.
+
+## What We Offer
+
+- **Kiosk Banking Software:** Verified software downloads for SBI, PNB, BOB, BOI and other major banks.
+- **RD Service & Biometric Drivers:** Morpho, Mantra, Secugen fingerprint device drivers.
+- **Common Utilities:** Spice Money, PayNearby, Java Runtime (JRE), and other CSP tools.
+- **Calculators:** EMI, FD, RD, SIP, GST, TDS, Commission, and Age calculators.
+- **Government Schemes Info:** PM Jan Dhan Yojana, PMSBY, PMJJBY, Atal Pension Yojana.
+- **Help Guides:** Step-by-step guides to install CSP software, set up printers, fix AEPS issues.
+
+## Target Audience
+
+CSP operators, kiosk banking agents, bank mitras, and financial service providers across India.
+
+## Domain
+
+https://kiosk-software.veerexa.com
+
+## Contact
+
+Website: https://veerexa.com
