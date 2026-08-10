@@ -10,7 +10,7 @@ export const SOFTWARE_LIST = [
   { name: "SBI Morpho Driver", bank: "SBI", version: "v1.7", size: "12 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
   { name: "PNB One CSP", bank: "PNB", version: "v1.3.2", size: "28 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "PNB Fingerprint Driver", bank: "PNB", version: "v1.4", size: "9 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "BOB World CSP", bank: "Bank of Baroda", version: "v3.0.1", size: "20 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
+  { name: "BOB World CSP", bank: "Bank of Baroda", version: "v3.0.1", size: "231 MB", link: "https://drive.google.com/uc?export=download&confirm=t&id=1JtmLbbhKWKiabkLNhIIabDFHsw6kt_rc", tag: "NEW" },
   { name: "Bank of India App", bank: "Bank of India", version: "v2.6", size: "22 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
   { name: "Spice Money", bank: "Common Utilities", version: "v6.2", size: "25 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "PayNearby", bank: "Common Utilities", version: "v5.8", size: "15 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
