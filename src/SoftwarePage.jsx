@@ -135,7 +135,7 @@ export default function SoftwarePage() {
                                         <div className="flex items-center gap-2 mb-1">
                                             <h3 className="text-[15px] text-ink font-semibold truncate">{s.name}</h3>
                                             {s.tag && (
-                                                <span className="text-[10px] font-bold text-white bg-emerald-600 px-1.5 py-0.5 rounded">
+                                                <span className={`text-[10px] font-bold text-white ${s.tagColor || 'bg-emerald-600'} px-1.5 py-0.5 rounded`}>
                                                     {s.tag}
                                                 </span>
                                             )}
@@ -149,6 +149,11 @@ export default function SoftwarePage() {
                                                 </>
                                             )}
                                         </div>
+                                        {s.message && (
+                                            <div className="text-[12px] text-muted mt-1">
+                                                {s.message}
+                                            </div>
+                                        )}
                                     </div>
                                     <a
                                         href={s.link}

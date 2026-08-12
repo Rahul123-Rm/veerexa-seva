@@ -168,9 +168,10 @@ export default function App() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="text-[13px] text-ink font-medium truncate">{s.name}</span>
-                        <span className="text-[9.5px] font-semibold text-white bg-emerald-600 px-1.5 py-0.5 rounded">NEW</span>
+                        <span className={`text-[9.5px] font-semibold text-white ${s.tagColor || 'bg-emerald-600'} px-1.5 py-0.5 rounded`}>NEW</span>
                       </div>
                       <span className="text-[11px] text-muted">{s.time || "a few hours ago"}</span>
+                      {s.message && <span className="text-[11px] text-muted block mt-0.5">{s.message}</span>}
                     </div>
                     <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-accent shrink-0">
                       <Download className="w-4 h-4" />
@@ -190,6 +191,7 @@ export default function App() {
                     <div className="flex-1 min-w-0">
                       <span className="text-[13px] text-ink font-medium block truncate">{s.name}</span>
                       <span className="text-[11px] text-muted">{s.version} {s.size ? "| " + s.size : ""}</span>
+                      {s.message && <span className="text-[11px] text-muted block mt-0.5">{s.message}</span>}
                     </div>
                     <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-accent shrink-0">
                       <Download className="w-4 h-4" />

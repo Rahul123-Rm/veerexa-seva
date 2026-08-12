@@ -5,12 +5,16 @@
    ============================================================ */
 
 export const SOFTWARE_LIST = [
+  { name: "BOB Kiosk Banking Peri Services", bank: "Bank of Baroda", version: "v1.0", size: "431 MB", link: "https://drive.usercontent.google.com/download?id=1z7Al5K3XD8YQvsfefFBPqdvmXav6pUA3&export=download&authuser=0", tag: "NEW", tagColor: "bg-rose-600", message: "Bank of Baroda kiosk /setup Version_59" },
   { name: "SBI Kiosk Banking App", bank: "SBI", version: "v4.2", size: "32 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "SBI RD Service Setup", bank: "SBI", version: "v2.1", size: "18 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
   { name: "SBI Morpho Driver", bank: "SBI", version: "v1.7", size: "12 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
   { name: "PNB One CSP", bank: "PNB", version: "v1.3.2", size: "28 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "PNB Fingerprint Driver", bank: "PNB", version: "v1.4", size: "9 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "BOB World CSP", bank: "Bank of Baroda", version: "v3.0.1", size: "231 MB", link: "https://drive.google.com/uc?export=download&confirm=t&id=1JtmLbbhKWKiabkLNhIIabDFHsw6kt_rc", tag: "NEW" },
+  { name: "BOB World CSP", bank: "Bank of Baroda", version: "v3.0.1", size: "231 MB", link: "https://drive.usercontent.google.com/download?id=1JtmLbbhKWKiabkLNhIIabDFHsw6kt_rc&export=download&authuser=0", tag: "NEW" },
+  { name: "BOB Biometric Driver", bank: "Bank of Baroda", version: "v1.0", size: "- MB", link: "https://drive.usercontent.google.com/download?id=1hPleYGuZYDgBmaDbPsgXfHmovU2YVh1O&export=download&authuser=0", tag: "NEW" },
+  { name: "BOB Passbook / Receipt Printer Driver", bank: "Bank of Baroda", version: "v1.0", size: "- MB", link: "https://drive.usercontent.google.com/download?id=15iIilDube8GLVtUB7_cMko79LON1t0e_&export=download&authuser=0", tag: "NEW" },
+  { name: "BOB Mitra", bank: "Bank of Baroda", version: "v1.0", size: "177 MB", link: "https://drive.usercontent.google.com/download?id=1fAS2K59gZl3BiGiA2voHcOxCHtrgir6Q&export=download&authuser=0", tag: "NEW" },
   { name: "Bank of India App", bank: "Bank of India", version: "v2.6", size: "22 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
   { name: "Spice Money", bank: "Common Utilities", version: "v6.2", size: "25 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "PayNearby", bank: "Common Utilities", version: "v5.8", size: "15 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
