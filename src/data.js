@@ -6,6 +6,7 @@
 
 export const SOFTWARE_LIST = [
   { name: "BOB Kiosk Banking Peri Services", bank: "Bank of Baroda", version: "v1.0", size: "431 MB", link: "https://drive.usercontent.google.com/download?id=1z7Al5K3XD8YQvsfefFBPqdvmXav6pUA3&export=download&authuser=0", tag: "NEW", tagColor: "bg-rose-600", message: "Bank of Baroda kiosk /setup Version_59" },
+  { name: "Windows_L1-RDServiceV5.0.0.10-HTTPs-127.0.0.1", bank: "Bank of Baroda", version: "v5.0.0.10", size: "13 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "SBI Kiosk Banking App", bank: "SBI", version: "v4.2", size: "32 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID", tag: "NEW" },
   { name: "SBI RD Service Setup", bank: "SBI", version: "v2.1", size: "18 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
   { name: "SBI Morpho Driver", bank: "SBI", version: "v1.7", size: "12 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
