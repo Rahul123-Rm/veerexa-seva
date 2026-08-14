@@ -5,21 +5,21 @@
    ============================================================ */
 
 export const SOFTWARE_LIST = [
-  { name: "BOB Kiosk Banking Peri Services", bank: "Bank of Baroda", version: "v1.0", size: "431 MB", link: "https://drive.usercontent.google.com/download?id=1z7Al5K3XD8YQvsfefFBPqdvmXav6pUA3&export=download&authuser=0", tag: "NEW", tagColor: "bg-rose-600", message: "Bank of Baroda kiosk /setup Version_59" },
-  { name: "Windows_Morpho_L1-RDServiceV5.0.0.10-HTTPs-127.0.0.1", bank: "Bank of Baroda", version: "v5.0.0.10", size: "13 MB", link: "https://github.com/Rahul123-Rm/veerexa-seva/releases/download/windows-morpho-l1-rdservice-v5.0.0.10/Windows_L1-RDServiceV5.0.0.10-HTTPs-127.0.0.1.zip" },
-  { name: "Mantra L1 RD services v.5.1", bank: "Bank of Baroda", version: "v5.1", size: "177 MB", link: "https://drive.usercontent.google.com/download?id=1fAS2K59gZl3BiGiA2voHcOxCHtrgir6Q&export=download&authuser=0" },
-  { name: "EVOLUTE GPS 1.03 Driver", bank: "Bank of Baroda", version: "v1.03", size: "231 MB", link: "https://drive.usercontent.google.com/download?id=1JtmLbbhKWKiabkLNhIIabDFHsw6kt_rc&export=download&authuser=0" },
-  { name: "SBI Kiosk Banking App", bank: "SBI", version: "v4.2", size: "32 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "SBI RD Service Setup", bank: "SBI", version: "v2.1", size: "18 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "SBI Morpho Driver", bank: "SBI", version: "v1.7", size: "12 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "PNB One CSP", bank: "PNB", version: "v1.3.2", size: "28 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "PNB Fingerprint Driver", bank: "PNB", version: "v1.4", size: "9 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "BOB Biometric Driver", bank: "Bank of Baroda", version: "v1.0", size: "- MB", link: "https://drive.usercontent.google.com/download?id=1hPleYGuZYDgBmaDbPsgXfHmovU2YVh1O&export=download&authuser=0" },
-  { name: "BOB Passbook / Receipt Printer Driver", bank: "Bank of Baroda", version: "v1.0", size: "- MB", link: "https://drive.usercontent.google.com/download?id=15iIilDube8GLVtUB7_cMko79LON1t0e_&export=download&authuser=0" },
-  { name: "Bank of India App", bank: "Bank of India", version: "v2.6", size: "22 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "Spice Money", bank: "Common Utilities", version: "v6.2", size: "25 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "PayNearby", bank: "Common Utilities", version: "v5.8", size: "15 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
-  { name: "Java Runtime (JRE)", bank: "Common Utilities", version: "8u411", size: "70 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "bob-kiosk-banking-peri-services", name: "BOB Kiosk Banking Peri Services", bank: "Bank of Baroda", version: "v1.0", size: "431 MB", link: "https://drive.usercontent.google.com/download?id=1z7Al5K3XD8YQvsfefFBPqdvmXav6pUA3&export=download&authuser=0", tag: "NEW", tagColor: "bg-rose-600", message: "Bank of Baroda kiosk /setup Version_59" },
+  { id: "windows-morpho-l1-rdservice", name: "Windows_Morpho_L1-RDServiceV5.0.0.10-HTTPs-127.0.0.1", bank: "Bank of Baroda", version: "v5.0.0.10", size: "13 MB", link: "https://github.com/Rahul123-Rm/veerexa-seva/releases/download/windows-morpho-l1-rdservice-v5.0.0.10/Windows_L1-RDServiceV5.0.0.10-HTTPs-127.0.0.1.zip" },
+  { id: "mantra-l1-rd-services", name: "Mantra L1 RD services v.5.1", bank: "Bank of Baroda", version: "v5.1", size: "177 MB", link: "https://drive.usercontent.google.com/download?id=1fAS2K59gZl3BiGiA2voHcOxCHtrgir6Q&export=download&authuser=0" },
+  { id: "evolute-gps-driver", name: "EVOLUTE GPS 1.03 Driver", bank: "Bank of Baroda", version: "v1.03", size: "231 MB", link: "https://drive.usercontent.google.com/download?id=1JtmLbbhKWKiabkLNhIIabDFHsw6kt_rc&export=download&authuser=0" },
+  { id: "sbi-kiosk-banking-app", name: "SBI Kiosk Banking App", bank: "SBI", version: "v4.2", size: "32 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "sbi-rd-service-setup", name: "SBI RD Service Setup", bank: "SBI", version: "v2.1", size: "18 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "sbi-morpho-driver", name: "SBI Morpho Driver", bank: "SBI", version: "v1.7", size: "12 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "pnb-one-csp", name: "PNB One CSP", bank: "PNB", version: "v1.3.2", size: "28 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "pnb-fingerprint-driver", name: "PNB Fingerprint Driver", bank: "PNB", version: "v1.4", size: "9 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "bob-biometric-driver", name: "BOB Biometric Driver", bank: "Bank of Baroda", version: "v1.0", size: "- MB", link: "https://drive.usercontent.google.com/download?id=1hPleYGuZYDgBmaDbPsgXfHmovU2YVh1O&export=download&authuser=0" },
+  { id: "bob-passbook-receipt-printer-driver", name: "BOB Passbook / Receipt Printer Driver", bank: "Bank of Baroda", version: "v1.0", size: "- MB", link: "https://drive.usercontent.google.com/download?id=15iIilDube8GLVtUB7_cMko79LON1t0e_&export=download&authuser=0" },
+  { id: "bank-of-india-app", name: "Bank of India App", bank: "Bank of India", version: "v2.6", size: "22 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "spice-money", name: "Spice Money", bank: "Common Utilities", version: "v6.2", size: "25 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "paynearby", name: "PayNearby", bank: "Common Utilities", version: "v5.8", size: "15 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
+  { id: "java-runtime-jre", name: "Java Runtime (JRE)", bank: "Common Utilities", version: "8u411", size: "70 MB", link: "https://drive.google.com/uc?export=download&id=REPLACE_WITH_FILE_ID" },
 ]
 
 export const HIGHLIGHTS = [

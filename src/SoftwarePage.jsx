@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Search, Download, Landmark, CheckSquare } from 'lucide-react'
 import { SOFTWARE_LIST } from './data.js'
 
@@ -11,7 +11,13 @@ const BANKS = [
 ]
 
 export default function SoftwarePage() {
-    const [selectedBank, setSelectedBank] = useState('SBI')
+    const [selectedBank, setSelectedBank] = useState(() => {
+        return localStorage.getItem('veerexa_selectedBank') || 'SBI'
+    })
+
+    useEffect(() => {
+        localStorage.setItem('veerexa_selectedBank', selectedBank)
+    }, [selectedBank])
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedSoftware, setSelectedSoftware] = useState([])
 
@@ -63,8 +69,8 @@ export default function SoftwarePage() {
         <div className="max-w-6xl mx-auto px-5 py-8">
             <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-display font-bold text-navy mb-2">Software Downloads</h1>
-                    <p className="text-muted text-[14px]">Download the latest CSP software, drivers, and tools for your bank.</p>
+                    <h1 className="text-2xl font-display font-bold text-navy mb-2">Kiosk Banking Software Downloads</h1>
+                    <p className="text-muted text-[14px]">Download the latest Kiosk CSP software, drivers, and tools for your bank.</p>
                 </div>
                 {selectedSoftware.length > 0 && (
                     <button
@@ -119,7 +125,7 @@ export default function SoftwarePage() {
                     {filteredSoftware.length > 0 ? (
                         <ul className="divide-y divide-border">
                             {filteredSoftware.map((s, i) => (
-                                <li key={i} className={`flex items-center gap-4 p-4 transition-colors ${selectedSoftware.includes(s.name) ? 'bg-accent/5' : 'hover:bg-surface2'}`}>
+                                <li key={i} id={s.id} className={`flex items-center gap-4 p-4 transition-colors ${selectedSoftware.includes(s.name) ? 'bg-accent/5' : 'hover:bg-surface2'}`}>
                                     <div className="flex items-center justify-center shrink-0">
                                         <input
                                             type="checkbox"

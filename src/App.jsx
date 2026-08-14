@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import {
   Search, Sun, Download, Newspaper, FileText, Calculator, Wrench, Landmark,
   Shield, HeartHandshake, BookOpen, Printer, AlertCircle, Info, ChevronRight,
@@ -9,6 +9,7 @@ import {
   CALCULATORS, IMPORTANT_DATES, GOVT_SCHEMES, HELP_GUIDES, NAV_LINKS
 } from './data.js'
 import SoftwarePage from './SoftwarePage.jsx'
+import SeoSchema from './SeoSchema.jsx'
 
 const ICONS = {
   Download, Newspaper, FileText, Calculator, Wrench, Search, Landmark,
@@ -43,7 +44,13 @@ function Card({ title, viewAllHref = "#", children }) {
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [currentPage, setCurrentPage] = useState("home")
+  const [currentPage, setCurrentPage] = useState(() => {
+    return localStorage.getItem('veerexa_currentPage') || "home"
+  })
+
+  useEffect(() => {
+    localStorage.setItem('veerexa_currentPage', currentPage)
+  }, [currentPage])
 
   const bankStatusColor = s => s === "Working" ? "text-ok" : "text-rose-600"
   const bankDotColor = s => s === "Working" ? "bg-ok" : "bg-rose-600"
@@ -53,6 +60,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SeoSchema />
       {/* HEADER */}
       <header className="bg-white border-b border-border sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center gap-6">
@@ -161,7 +169,7 @@ export default function App() {
             <Card title="New Software">
               <ul className="divide-y divide-border">
                 {newSoftware.map((s, i) => (
-                  <li key={i} className="flex items-center gap-3 py-2.5">
+                  <li key={i} id={s.id} className="flex items-center gap-3 py-2.5">
                     <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                       <Landmark className="w-4 h-4 text-navy" />
                     </div>
@@ -184,7 +192,7 @@ export default function App() {
             <Card title="Popular Downloads">
               <ul className="divide-y divide-border">
                 {popularDownloads.map((s, i) => (
-                  <li key={i} className="flex items-center gap-3 py-2.5">
+                  <li key={i} id={s.id} className="flex items-center gap-3 py-2.5">
                     <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                       <Landmark className="w-4 h-4 text-navy" />
                     </div>
