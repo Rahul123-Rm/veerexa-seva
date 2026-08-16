@@ -169,7 +169,7 @@ export default function App() {
             <Card title="New Software">
               <ul className="divide-y divide-border">
                 {newSoftware.map((s, i) => (
-                  <li key={i} id={s.id} className="flex items-center gap-3 py-2.5">
+                  <li key={i} id={s.id} onClick={() => window.history.pushState(null, '', `#${s.id}`)} className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-surface2 px-2 -mx-2 rounded-lg transition-colors">
                     <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                       <Landmark className="w-4 h-4 text-navy" />
                     </div>
@@ -181,7 +181,7 @@ export default function App() {
                       <span className="text-[11px] text-muted">{s.time || "a few hours ago"}</span>
                       {s.message && <span className="text-[11px] text-muted block mt-0.5">{s.message}</span>}
                     </div>
-                    <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-accent shrink-0">
+                    <a href={s.link} target="_blank" rel="noopener noreferrer" onClick={(e) => { e.stopPropagation(); window.history.pushState(null, '', `#${s.id}`); }} className="text-accent shrink-0">
                       <Download className="w-4 h-4" />
                     </a>
                   </li>
@@ -192,7 +192,7 @@ export default function App() {
             <Card title="Popular Downloads">
               <ul className="divide-y divide-border">
                 {popularDownloads.map((s, i) => (
-                  <li key={i} id={s.id} className="flex items-center gap-3 py-2.5">
+                  <li key={i} id={s.id} onClick={() => window.history.pushState(null, '', `#${s.id}`)} className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-surface2 px-2 -mx-2 rounded-lg transition-colors">
                     <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                       <Landmark className="w-4 h-4 text-navy" />
                     </div>
@@ -201,7 +201,7 @@ export default function App() {
                       <span className="text-[11px] text-muted">{s.version} {s.size ? "| " + s.size : ""}</span>
                       {s.message && <span className="text-[11px] text-muted block mt-0.5">{s.message}</span>}
                     </div>
-                    <a href={s.link} target="_blank" rel="noopener noreferrer" className="text-accent shrink-0">
+                    <a href={s.link} target="_blank" rel="noopener noreferrer" onClick={(e) => { e.stopPropagation(); window.history.pushState(null, '', `#${s.id}`); }} className="text-accent shrink-0">
                       <Download className="w-4 h-4" />
                     </a>
                   </li>

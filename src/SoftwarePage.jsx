@@ -31,7 +31,14 @@ export default function SoftwarePage() {
 
     const handleBankChange = (bankId) => {
         setSelectedBank(bankId)
+        setSearchQuery('')
         setSelectedSoftware([])
+        window.history.pushState(null, '', `#bank-${bankId.toLowerCase().replace(/\s+/g, '-')}`)
+    }
+
+    const handleSoftwareClick = (s) => {
+        toggleSelection(s.name)
+        window.history.pushState(null, '', `#${s.id}`)
     }
 
     const toggleSelection = (softwareName) => {
@@ -125,19 +132,22 @@ export default function SoftwarePage() {
                     {filteredSoftware.length > 0 ? (
                         <ul className="divide-y divide-border">
                             {filteredSoftware.map((s, i) => (
-                                <li key={i} id={s.id} className={`flex items-center gap-4 p-4 transition-colors ${selectedSoftware.includes(s.name) ? 'bg-accent/5' : 'hover:bg-surface2'}`}>
+                                <li key={i} id={s.id} onClick={() => handleSoftwareClick(s)} className={`flex items-center gap-4 p-4 transition-colors ${selectedSoftware.includes(s.name) ? 'bg-accent/5' : 'hover:bg-surface2'}`}>
                                     <div className="flex items-center justify-center shrink-0">
                                         <input
                                             type="checkbox"
                                             checked={selectedSoftware.includes(s.name)}
-                                            onChange={() => toggleSelection(s.name)}
+                                            onChange={(e) => {
+                                                e.stopPropagation();
+                                                handleSoftwareClick(s);
+                                            }}
                                             className="w-4.5 h-4.5 rounded border-border text-accent focus:ring-accent cursor-pointer"
                                         />
                                     </div>
                                     <div className="w-12 h-12 rounded-xl bg-navy/5 flex items-center justify-center shrink-0 hidden sm:flex">
                                         <Landmark className="w-6 h-6 text-navy" />
                                     </div>
-                                    <div className="flex-1 min-w-0 cursor-pointer" onClick={() => toggleSelection(s.name)}>
+                                    <div className="flex-1 min-w-0 cursor-pointer">
                                         <div className="flex items-center gap-2 mb-1">
                                             <h3 className="text-[15px] text-ink font-semibold truncate">{s.name}</h3>
                                             {s.tag && (
@@ -165,6 +175,10 @@ export default function SoftwarePage() {
                                         href={s.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            window.history.pushState(null, '', `#${s.id}`);
+                                        }}
                                         className="flex items-center gap-2 bg-white border border-border hover:border-accent hover:text-accent text-ink px-4 py-2 rounded-lg text-[13px] font-medium transition-colors shrink-0"
                                     >
                                         <Download className="w-4 h-4" />
