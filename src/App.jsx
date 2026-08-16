@@ -10,6 +10,7 @@ import {
 } from './data.js'
 import SoftwarePage from './SoftwarePage.jsx'
 import SeoSchema from './SeoSchema.jsx'
+import ContactPage, { FormModal } from './ContactPage.jsx'
 
 const ICONS = {
   Download, Newspaper, FileText, Calculator, Wrench, Search, Landmark,
@@ -52,6 +53,8 @@ export default function App() {
     localStorage.setItem('veerexa_currentPage', currentPage)
   }, [currentPage])
 
+  const [showContactForm, setShowContactForm] = useState(false)
+
   const bankStatusColor = s => s === "Working" ? "text-ok" : "text-rose-600"
   const bankDotColor = s => s === "Working" ? "bg-ok" : "bg-rose-600"
 
@@ -61,6 +64,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-bg">
       <SeoSchema />
+      {showContactForm && <FormModal onClose={() => setShowContactForm(false)} />}
       {/* HEADER */}
       <header className="bg-white border-b border-border sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center gap-6">
@@ -88,8 +92,8 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
-            <a href="#" className="hidden sm:inline hover:text-navy">About Us</a>
-            <a href="#" className="hidden sm:inline hover:text-navy">Contact Us</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hidden sm:inline hover:text-navy">About Us</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hidden sm:inline hover:text-navy">Contact Us</a>
             <Sun className="w-4 h-4 hidden sm:block hover:text-navy cursor-pointer" />
             <button className="bg-navy text-white text-[13px] font-medium px-4 py-1.5 rounded-md">Login</button>
           </div>
@@ -107,9 +111,12 @@ export default function App() {
                   } else if (link === "Home") {
                     e.preventDefault();
                     setCurrentPage("home");
+                  } else if (link === "Help Center") {
+                    e.preventDefault();
+                    setShowContactForm(true);
                   }
                 }}
-                className={"py-2.5 whitespace-nowrap border-b-2 " + ((currentPage === 'home' && link === 'Home') || (currentPage === 'software' && link === 'Software') ? "text-accent border-accent" : "border-transparent hover:text-navy")}
+                className={"py-2.5 whitespace-nowrap border-b-2 " + ((currentPage === 'home' && link === 'Home') || (currentPage === 'software' && link === 'Software') || (currentPage === 'contact' && link === 'Help Center') ? "text-accent border-accent" : "border-transparent hover:text-navy")}
               >
                 {link}
               </a>
@@ -120,6 +127,8 @@ export default function App() {
 
       {currentPage === 'software' ? (
         <SoftwarePage />
+      ) : currentPage === 'contact' ? (
+        <ContactPage onOpenForm={() => setShowContactForm(true)} />
       ) : (
         <div className="max-w-6xl mx-auto px-5 py-5 space-y-5">
 
@@ -308,8 +317,8 @@ export default function App() {
           <div>
             <h5 className="text-white font-semibold text-[13px] mb-3">Quick Links</h5>
             <ul className="space-y-2 text-[12.5px]">
-              <li><a href="#" className="hover:text-white">About Us</a></li>
-              <li><a href="#" className="hover:text-white">Contact Us</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hover:text-white">About Us</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hover:text-white">Contact Us</a></li>
               <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-white">Terms &amp; Conditions</a></li>
             </ul>
