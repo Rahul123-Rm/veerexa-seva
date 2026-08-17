@@ -7,7 +7,7 @@ const GOOGLE_FORM_DIRECT = "https://docs.google.com/forms/d/e/1FAIpQLScFJR158guL
 function FormModal({ onClose }) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)' }}>
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col" style={{ maxHeight: '90vh' }}>
+            <div className="bg-surface rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col" style={{ maxHeight: '90vh' }}>
                 <div className="flex items-center justify-between px-5 py-4 bg-navy rounded-t-2xl shrink-0">
                     <div className="flex items-center gap-2">
                         <MessageSquare className="w-4 h-4 text-accent2" />
@@ -50,7 +50,7 @@ export default function ContactPage({ onOpenForm }) {
 
                 {/* LEFT: Info */}
                 <div className="space-y-4">
-                    <div className="bg-white border border-border rounded-xl p-5">
+                    <div className="bg-surface border border-border rounded-xl p-5">
                         <h2 className="font-display font-semibold text-[14px] text-ink mb-4">Get in Touch</h2>
                         <ul className="space-y-3.5">
                             <li className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export default function ContactPage({ onOpenForm }) {
                         </ul>
                     </div>
 
-                    <div className="bg-white border border-border rounded-xl p-4">
+                    <div className="bg-surface border border-border rounded-xl p-4">
                         <h3 className="font-semibold text-[13px] text-ink mb-3">⏱ Response Time</h3>
                         <div className="space-y-2.5">
                             {[
@@ -106,7 +106,7 @@ export default function ContactPage({ onOpenForm }) {
                 {/* RIGHT: CTA + Quick Help */}
                 <div className="lg:col-span-2 space-y-4">
 
-                    <div className="bg-white border border-border rounded-xl p-6">
+                    <div className="bg-surface border border-border rounded-xl p-6">
                         <div className="flex items-start gap-4">
                             <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center shrink-0">
                                 <MessageSquare className="w-7 h-7 text-accent" />
@@ -128,7 +128,7 @@ export default function ContactPage({ onOpenForm }) {
                                         href={GOOGLE_FORM_DIRECT}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-2 bg-white border border-border hover:border-accent hover:text-accent text-ink font-medium text-[13.5px] px-5 py-2.5 rounded-lg transition-colors"
+                                        className="flex items-center gap-2 bg-surface border border-border hover:border-accent hover:text-accent text-ink font-medium text-[13.5px] px-5 py-2.5 rounded-lg transition-colors"
                                     >
                                         <ExternalLink className="w-4 h-4" />
                                         Open in New Tab
@@ -138,7 +138,7 @@ export default function ContactPage({ onOpenForm }) {
                         </div>
                     </div>
 
-                    <div className="bg-white border border-border rounded-xl p-5">
+                    <div className="bg-surface border border-border rounded-xl p-5">
                         <h3 className="font-display font-semibold text-[14px] text-ink mb-3">How Can We Help You?</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {[

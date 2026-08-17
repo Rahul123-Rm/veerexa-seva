@@ -101,7 +101,7 @@ export default function SoftwarePage() {
                 )}
             </div>
 
-            <div className="bg-white border border-border rounded-xl overflow-hidden mb-6 shadow-sm">
+            <div className="bg-surface border border-border rounded-xl overflow-hidden mb-6 shadow-sm">
                 <div className="flex overflow-x-auto border-b border-border">
                     {BANKS.map(bank => (
                         <button
@@ -125,7 +125,7 @@ export default function SoftwarePage() {
                             placeholder={`Search ${BANKS.find(b => b.id === selectedBank)?.label} software...`}
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 py-2 rounded-lg border border-border text-[13.5px] outline-none focus:border-accent bg-white"
+                            className="w-full pl-9 pr-4 py-2 rounded-lg border border-border text-[13.5px] outline-none focus:border-accent bg-surface"
                         />
                     </div>
                     {filteredSoftware.length > 0 && (
@@ -190,7 +190,7 @@ export default function SoftwarePage() {
                                             e.stopPropagation();
                                             window.history.pushState(null, '', `#${s.id}`);
                                         }}
-                                        className="flex items-center gap-2 bg-white border border-border hover:border-accent hover:text-accent text-ink px-4 py-2 rounded-lg text-[13px] font-medium transition-colors shrink-0"
+                                        className="flex items-center gap-2 bg-surface border border-border hover:border-accent hover:text-accent text-ink px-4 py-2 rounded-lg text-[13px] font-medium transition-colors shrink-0"
                                     >
                                         <Download className="w-4 h-4" />
                                         <span className="hidden sm:inline">Download</span>
