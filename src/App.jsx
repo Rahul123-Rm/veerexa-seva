@@ -136,19 +136,44 @@ export default function App() {
                           <div className="w-8 h-8 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                             <Landmark className="w-4 h-4 text-navy" />
                           </div>
-                          <div className="flex-1 min-w-0 cursor-pointer" onClick={() => { setCurrentPage('software'); setShowResults(false); setSearchTerm(''); }}>
+                          <div className="flex-1 min-w-0 cursor-pointer" onClick={() => {
+                            localStorage.setItem('veerexa_selectedBank', s.bank);
+                            window.dispatchEvent(new Event('bankChanged'));
+                            setCurrentPage('software');
+                            setShowResults(false);
+                            setSearchTerm('');
+                            setTimeout(() => {
+                              const el = document.getElementById(s.id);
+                              if (el) {
+                                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                el.classList.add('bg-accent/10');
+                                setTimeout(() => el.classList.remove('bg-accent/10'), 2000);
+                              }
+                            }, 100);
+                          }}>
                             <p className="text-[13px] text-ink font-semibold truncate">{s.name}</p>
                             <p className="text-[11px] text-muted">{s.bank} &bull; {s.version} &bull; {s.size}</p>
                           </div>
-                          <a
-                            href={s.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => setShowResults(false)}
-                            className="flex items-center gap-1.5 bg-accent hover:bg-accent/90 text-white text-[11.5px] font-medium px-3 py-1.5 rounded-md shrink-0 transition-colors"
+                          <button
+                            onClick={() => {
+                              localStorage.setItem('veerexa_selectedBank', s.bank);
+                              window.dispatchEvent(new Event('bankChanged'));
+                              setCurrentPage('software');
+                              setShowResults(false);
+                              setSearchTerm('');
+                              setTimeout(() => {
+                                const el = document.getElementById(s.id);
+                                if (el) {
+                                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                  el.classList.add('bg-accent/10');
+                                  setTimeout(() => el.classList.remove('bg-accent/10'), 2000);
+                                }
+                              }, 100);
+                            }}
+                            className="flex items-center gap-1.5 bg-surface2 hover:bg-border text-ink text-[11.5px] font-medium px-3 py-1.5 rounded-md shrink-0 transition-colors"
                           >
-                            <Download className="w-3 h-3" /> Download
-                          </a>
+                            View <ChevronRight className="w-3 h-3" />
+                          </button>
                         </li>
                       ))}
                     </ul>
@@ -258,7 +283,19 @@ export default function App() {
             <Card title="New Software">
               <ul className="divide-y divide-border">
                 {newSoftware.map((s, i) => (
-                  <li key={i} id={s.id} onClick={() => window.history.pushState(null, '', `#${s.id}`)} className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-surface2 px-2 -mx-2 rounded-lg transition-colors">
+                  <li key={i} id={s.id} onClick={() => {
+                    localStorage.setItem('veerexa_selectedBank', s.bank);
+                    window.dispatchEvent(new Event('bankChanged'));
+                    setCurrentPage('software');
+                    setTimeout(() => {
+                      const el = document.getElementById(s.id);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        el.classList.add('bg-accent/10');
+                        setTimeout(() => el.classList.remove('bg-accent/10'), 2000);
+                      }
+                    }, 100);
+                  }} className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-surface2 px-2 -mx-2 rounded-lg transition-colors">
                     <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                       <Landmark className="w-4 h-4 text-navy" />
                     </div>
@@ -281,7 +318,19 @@ export default function App() {
             <Card title="Popular Downloads">
               <ul className="divide-y divide-border">
                 {popularDownloads.map((s, i) => (
-                  <li key={i} id={s.id} onClick={() => window.history.pushState(null, '', `#${s.id}`)} className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-surface2 px-2 -mx-2 rounded-lg transition-colors">
+                  <li key={i} id={s.id} onClick={() => {
+                    localStorage.setItem('veerexa_selectedBank', s.bank);
+                    window.dispatchEvent(new Event('bankChanged'));
+                    setCurrentPage('software');
+                    setTimeout(() => {
+                      const el = document.getElementById(s.id);
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        el.classList.add('bg-accent/10');
+                        setTimeout(() => el.classList.remove('bg-accent/10'), 2000);
+                      }
+                    }, 100);
+                  }} className="flex items-center gap-3 py-2.5 cursor-pointer hover:bg-surface2 px-2 -mx-2 rounded-lg transition-colors">
                     <div className="w-9 h-9 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
                       <Landmark className="w-4 h-4 text-navy" />
                     </div>
