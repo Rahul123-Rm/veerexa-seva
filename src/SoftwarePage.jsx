@@ -18,6 +18,17 @@ export default function SoftwarePage() {
     useEffect(() => {
         localStorage.setItem('veerexa_selectedBank', selectedBank)
     }, [selectedBank])
+
+    useEffect(() => {
+        const handleBankChange = () => {
+            const newBank = localStorage.getItem('veerexa_selectedBank');
+            if (newBank && newBank !== selectedBank) {
+                setSelectedBank(newBank);
+            }
+        };
+        window.addEventListener('bankChanged', handleBankChange);
+        return () => window.removeEventListener('bankChanged', handleBankChange);
+    }, [selectedBank]);
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedSoftware, setSelectedSoftware] = useState([])
 
