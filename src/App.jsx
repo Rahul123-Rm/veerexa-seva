@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import {
   Search, Sun, Download, Newspaper, FileText, Calculator, Wrench, Landmark,
   Shield, HeartHandshake, BookOpen, Printer, AlertCircle, Info, ChevronRight,
@@ -61,6 +61,32 @@ export default function App() {
   const newSoftware = useMemo(() => SOFTWARE_LIST.filter(s => s.tag === "NEW").slice(0, 4), [])
   const popularDownloads = useMemo(() => SOFTWARE_LIST.slice(0, 5), [])
 
+  // Search
+  const [showResults, setShowResults] = useState(false)
+  const searchRef = useRef(null)
+
+  const searchResults = useMemo(() => {
+    if (!searchTerm.trim() || searchTerm.length < 2) return []
+    const q = searchTerm.toLowerCase()
+    return SOFTWARE_LIST.filter(s =>
+      s.name.toLowerCase().includes(q) ||
+      s.bank.toLowerCase().includes(q) ||
+      (s.id && s.id.toLowerCase().includes(q)) ||
+      (s.version && s.version.toLowerCase().includes(q)) ||
+      (s.message && s.message.toLowerCase().includes(q))
+    ).slice(0, 8)
+  }, [searchTerm])
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowResults(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <div className="min-h-screen bg-bg">
       <SeoSchema />
@@ -78,17 +104,71 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex-1 max-w-xl hidden md:flex items-center gap-2 bg-surface2 border border-border rounded-lg px-3 py-2">
-            <Search className="w-4 h-4 text-muted" />
-            <input
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-              placeholder="Search IFSC, Bank, Software, Tools, Forms..."
-              className="flex-1 bg-transparent outline-none text-[13.5px] text-ink placeholder:text-muted"
-            />
-            <button className="bg-accent hover:bg-accent/90 text-white text-[12.5px] font-medium px-3.5 py-1.5 rounded-md flex items-center gap-1">
-              <Search className="w-3.5 h-3.5" /> Search
-            </button>
+          {/* SEARCH BAR */}
+          <div className="flex-1 max-w-xl hidden md:block relative" ref={searchRef}>
+            <div className="flex items-center gap-2 bg-surface2 border border-border rounded-lg px-3 py-2 focus-within:border-accent transition-colors">
+              <Search className="w-4 h-4 text-muted shrink-0" />
+              <input
+                value={searchTerm}
+                onChange={e => { setSearchTerm(e.target.value); setShowResults(true) }}
+                onFocus={() => setShowResults(true)}
+                placeholder="Search software, bank name, driver..."
+                className="flex-1 bg-transparent outline-none text-[13.5px] text-ink placeholder:text-muted"
+              />
+              {searchTerm && (
+                <button onClick={() => { setSearchTerm(''); setShowResults(false) }} className="text-muted hover:text-ink">
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+
+            {/* DROPDOWN RESULTS */}
+            {showResults && searchTerm.length >= 2 && (
+              <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-border rounded-xl shadow-xl z-50 overflow-hidden">
+                {searchResults.length > 0 ? (
+                  <>
+                    <div className="px-3 py-2 border-b border-border bg-surface2">
+                      <span className="text-[11.5px] text-muted font-medium">{searchResults.length} result{searchResults.length > 1 ? 's' : ''} found for "{searchTerm}"</span>
+                    </div>
+                    <ul className="max-h-72 overflow-y-auto divide-y divide-border">
+                      {searchResults.map((s) => (
+                        <li key={s.id} className="flex items-center gap-3 px-3 py-2.5 hover:bg-surface2 transition-colors">
+                          <div className="w-8 h-8 rounded-lg bg-navy/5 flex items-center justify-center shrink-0">
+                            <Landmark className="w-4 h-4 text-navy" />
+                          </div>
+                          <div className="flex-1 min-w-0 cursor-pointer" onClick={() => { setCurrentPage('software'); setShowResults(false); setSearchTerm(''); }}>
+                            <p className="text-[13px] text-ink font-semibold truncate">{s.name}</p>
+                            <p className="text-[11px] text-muted">{s.bank} &bull; {s.version} &bull; {s.size}</p>
+                          </div>
+                          <a
+                            href={s.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setShowResults(false)}
+                            className="flex items-center gap-1.5 bg-accent hover:bg-accent/90 text-white text-[11.5px] font-medium px-3 py-1.5 rounded-md shrink-0 transition-colors"
+                          >
+                            <Download className="w-3 h-3" /> Download
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="px-3 py-2 border-t border-border">
+                      <button
+                        onClick={() => { setCurrentPage('software'); setShowResults(false); setSearchTerm(''); }}
+                        className="text-[12px] text-accent font-medium hover:underline w-full text-center"
+                      >
+                        View all software →
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="px-4 py-5 text-center">
+                    <p className="text-[13px] text-muted">No software found for "{searchTerm}"</p>
+                    <p className="text-[11.5px] text-muted mt-1">Try: BOB, SBI, PNB, Morpho, Mantra, Driver...</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
