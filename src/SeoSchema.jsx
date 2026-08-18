@@ -27,11 +27,30 @@ const SeoSchema = () => {
         }))
     };
 
+    const ifscSchema = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "IFSC Code Finder - Veerexa",
+        "description": "Find IFSC codes, MICR codes, and branch details for all banks in India. Search by state, city, and branch.",
+        "url": "https://kiosk-software.veerexa.com/#ifsc",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://kiosk-software.veerexa.com/#ifsc?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    };
+
     return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(ifscSchema) }}
+            />
+        </>
     );
 };
 
