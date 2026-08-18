@@ -10,7 +10,7 @@ const BANKS = [
     { id: 'Common Utilities', label: 'Other Tools' }
 ]
 
-export default function SoftwarePage() {
+export default function SoftwarePage({ darkMode }) {
     const [selectedBank, setSelectedBank] = useState(() => {
         return localStorage.getItem('veerexa_selectedBank') || 'SBI'
     })
@@ -101,8 +101,17 @@ export default function SoftwarePage() {
                 )}
             </div>
 
-            <div className="bg-surface border border-border rounded-xl overflow-hidden mb-6 shadow-sm">
-                <div className="flex overflow-x-auto border-b border-border">
+            <div
+                className="rounded-xl overflow-hidden mb-6 shadow-sm"
+                style={{
+                    backgroundColor: darkMode ? '#111827' : '#ffffff',
+                    border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+                }}
+            >
+                <div
+                    className="flex overflow-x-auto"
+                    style={{ borderBottom: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}` }}
+                >
                     {BANKS.map(bank => (
                         <button
                             key={bank.id}
@@ -117,7 +126,13 @@ export default function SoftwarePage() {
                     ))}
                 </div>
 
-                <div className="p-4 bg-surface2 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div
+                    className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    style={{
+                        backgroundColor: darkMode ? '#1F2937' : '#F1F3F6',
+                        borderBottom: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+                    }}
+                >
                     <div className="relative max-w-md w-full">
                         <Search className="w-4 h-4 text-muted absolute left-3 top-1/2 -translate-y-1/2" />
                         <input
@@ -125,7 +140,12 @@ export default function SoftwarePage() {
                             placeholder={`Search ${BANKS.find(b => b.id === selectedBank)?.label} software...`}
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 py-2 rounded-lg border border-border text-[13.5px] outline-none focus:border-accent bg-surface"
+                            className="w-full pl-9 pr-4 py-2 rounded-lg border text-[13.5px] outline-none focus:border-accent"
+                            style={{
+                                backgroundColor: darkMode ? '#111827' : '#ffffff',
+                                borderColor: darkMode ? '#374151' : '#E4E7EC',
+                                color: darkMode ? '#E5E7EB' : '#1B2430',
+                            }}
                         />
                     </div>
                     {filteredSoftware.length > 0 && (
@@ -143,7 +163,26 @@ export default function SoftwarePage() {
                     {filteredSoftware.length > 0 ? (
                         <ul className="divide-y divide-border">
                             {filteredSoftware.map((s, i) => (
-                                <li key={i} id={s.id} onClick={() => handleSoftwareClick(s)} className={`flex items-center gap-4 p-4 transition-colors ${selectedSoftware.includes(s.name) ? 'bg-accent/5' : 'hover:bg-surface2'}`}>
+                                <li
+                                    key={i} id={s.id}
+                                    onClick={() => handleSoftwareClick(s)}
+                                    className="flex items-center gap-4 p-4 transition-colors"
+                                    style={{
+                                        backgroundColor: selectedSoftware.includes(s.name)
+                                            ? (darkMode ? 'rgba(59,130,246,0.15)' : 'rgba(31,111,235,0.05)')
+                                            : 'transparent',
+                                    }}
+                                    onMouseEnter={e => {
+                                        if (!selectedSoftware.includes(s.name)) {
+                                            e.currentTarget.style.backgroundColor = darkMode ? '#1F2937' : '#F1F3F6';
+                                        }
+                                    }}
+                                    onMouseLeave={e => {
+                                        if (!selectedSoftware.includes(s.name)) {
+                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                        }
+                                    }}
+                                >
                                     <div className="flex items-center justify-center shrink-0">
                                         <input
                                             type="checkbox"
@@ -160,7 +199,10 @@ export default function SoftwarePage() {
                                     </div>
                                     <div className="flex-1 min-w-0 cursor-pointer">
                                         <div className="flex items-center gap-2 mb-1">
-                                            <h3 className="text-[15px] text-ink font-semibold truncate">{s.name}</h3>
+                                            <h3
+                                                className="text-[15px] font-semibold truncate"
+                                                style={{ color: darkMode ? '#F3F4F6' : '#1B2430' }}
+                                            >{s.name}</h3>
                                             {s.tag && (
                                                 <span className={`text-[10px] font-bold text-white ${s.tagColor || 'bg-emerald-600'} px-1.5 py-0.5 rounded`}>
                                                     {s.tag}
@@ -190,7 +232,12 @@ export default function SoftwarePage() {
                                             e.stopPropagation();
                                             window.history.pushState(null, '', `#${s.id}`);
                                         }}
-                                        className="flex items-center gap-2 bg-surface border border-border hover:border-accent hover:text-accent text-ink px-4 py-2 rounded-lg text-[13px] font-medium transition-colors shrink-0"
+                                        className="flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-medium transition-colors shrink-0"
+                                        style={{
+                                            backgroundColor: darkMode ? '#1F2937' : '#ffffff',
+                                            border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+                                            color: darkMode ? '#E5E7EB' : '#1B2430',
+                                        }}
                                     >
                                         <Download className="w-4 h-4" />
                                         <span className="hidden sm:inline">Download</span>
