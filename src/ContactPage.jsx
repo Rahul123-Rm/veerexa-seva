@@ -42,8 +42,8 @@ export default function ContactPage({ onOpenForm }) {
 
             {/* Page Header */}
             <div className="mb-6">
-                <h1 className="text-2xl font-display font-bold text-navy mb-1">Contact Us & Feedback</h1>
-                <p className="text-muted text-[13.5px]">Any problem, suggestion or feedback? We are here to help you!</p>
+                <h1 className="text-2xl font-display font-bold text-navy mb-1">Help Center</h1>
+                <p className="text-muted text-[13.5px]">Welcome to the Veerexa Help Center. How can we assist you today?</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -68,7 +68,7 @@ export default function ContactPage({ onOpenForm }) {
                                 </div>
                                 <div>
                                     <p className="text-[13px] font-semibold text-ink">Email Support</p>
-                                    <p className="text-[12px] text-muted">veerexa0@gmail.com</p>
+                                    <p className="text-[12px] text-muted">veerexa@gmail.com</p>
                                 </div>
                             </li>
                             <li className="flex items-center gap-3">

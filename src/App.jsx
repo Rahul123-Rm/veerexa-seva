@@ -273,8 +273,8 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
-            <a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hidden sm:inline hover:text-navy">About Us</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hidden sm:inline hover:text-navy">Contact Us</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hidden sm:inline hover:text-navy">About Us</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hidden sm:inline hover:text-navy">Help Center</a>
             <button onClick={() => setDarkMode(!darkMode)} className="hidden sm:block hover:text-navy transition-colors">
               {darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </button>
@@ -299,7 +299,7 @@ export default function App() {
                     setCurrentPage("ifsc");
                   } else if (link === "Help Center") {
                     e.preventDefault();
-                    setShowContactForm(true);
+                    setCurrentPage("contact");
                   }
                 }}
                 className={"py-2.5 whitespace-nowrap border-b-2 " + ((currentPage === 'home' && link === 'Home') || (currentPage === 'software' && link === 'Software') || (currentPage === 'ifsc' && link === 'IFSC Code') || (currentPage === 'contact' && link === 'Help Center') ? "text-accent border-accent" : "border-transparent hover:text-navy")}
@@ -550,8 +550,8 @@ export default function App() {
           <div>
             <h5 className="text-white font-semibold text-[13px] mb-3">Quick Links</h5>
             <ul className="space-y-2 text-[12.5px]">
-              <li><a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hover:text-white">About Us</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hover:text-white">Contact Us</a></li>
+              <li><a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hover:text-white">About Us</a></li>
+              <li><a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hover:text-white">Help Center</a></li>
               <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-white">Terms &amp; Conditions</a></li>
             </ul>
