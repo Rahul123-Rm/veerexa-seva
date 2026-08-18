@@ -88,4 +88,4 @@ export const HELP_GUIDES = [
   { title: "CSP Commission Details", sub: "Check Latest Commission", icon: "Info" },
 ]
 
-export const NAV_LINKS = ["Home", "Software", "News & Updates", "Tools", "Calculators", "Forms & Documents", "Bank Info", "Schemes", "Help Center"]
+export const NAV_LINKS = ["Home", "Software", "IFSC Code", "News & Updates", "Tools", "Calculators", "Forms & Documents", "Bank Info", "Schemes", "Help Center"]

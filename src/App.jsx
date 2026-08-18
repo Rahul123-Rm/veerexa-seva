@@ -9,6 +9,7 @@ import {
   CALCULATORS, IMPORTANT_DATES, GOVT_SCHEMES, HELP_GUIDES, NAV_LINKS
 } from './data.js'
 import SoftwarePage from './SoftwarePage.jsx'
+import IfscCodePage from './IfscCodePage.jsx'
 import SeoSchema from './SeoSchema.jsx'
 import ContactPage, { FormModal } from './ContactPage.jsx'
 
@@ -53,12 +54,34 @@ function Card({ title, viewAllHref = "#", children, dm }) {
 export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [currentPage, setCurrentPage] = useState(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'software' || hash === 'ifsc' || hash === 'contact') {
+      return hash;
+    }
     return localStorage.getItem('veerexa_currentPage') || "home"
   })
 
   useEffect(() => {
     localStorage.setItem('veerexa_currentPage', currentPage)
+    if (currentPage === 'home') {
+      window.history.replaceState(null, '', window.location.pathname);
+    } else {
+      window.history.replaceState(null, '', `#${currentPage}`);
+    }
   }, [currentPage])
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'software' || hash === 'ifsc' || hash === 'contact') {
+        setCurrentPage(hash);
+      } else if (!hash) {
+        setCurrentPage('home');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const [showContactForm, setShowContactForm] = useState(false)
 
@@ -263,7 +286,7 @@ export default function App() {
             {NAV_LINKS.map((link, i) => (
               <a
                 key={link}
-                href="#"
+                href={link === "Home" ? "/" : link === "Software" ? "#software" : link === "IFSC Code" ? "#ifsc" : link === "Help Center" ? "#contact" : "#"}
                 onClick={(e) => {
                   if (link === "Software") {
                     e.preventDefault();
@@ -271,12 +294,15 @@ export default function App() {
                   } else if (link === "Home") {
                     e.preventDefault();
                     setCurrentPage("home");
+                  } else if (link === "IFSC Code") {
+                    e.preventDefault();
+                    setCurrentPage("ifsc");
                   } else if (link === "Help Center") {
                     e.preventDefault();
                     setShowContactForm(true);
                   }
                 }}
-                className={"py-2.5 whitespace-nowrap border-b-2 " + ((currentPage === 'home' && link === 'Home') || (currentPage === 'software' && link === 'Software') || (currentPage === 'contact' && link === 'Help Center') ? "text-accent border-accent" : "border-transparent hover:text-navy")}
+                className={"py-2.5 whitespace-nowrap border-b-2 " + ((currentPage === 'home' && link === 'Home') || (currentPage === 'software' && link === 'Software') || (currentPage === 'ifsc' && link === 'IFSC Code') || (currentPage === 'contact' && link === 'Help Center') ? "text-accent border-accent" : "border-transparent hover:text-navy")}
               >
                 {link}
               </a>
@@ -287,6 +313,8 @@ export default function App() {
 
       {currentPage === 'software' ? (
         <SoftwarePage darkMode={darkMode} />
+      ) : currentPage === 'ifsc' ? (
+        <IfscCodePage darkMode={darkMode} />
       ) : currentPage === 'contact' ? (
         <ContactPage onOpenForm={() => setShowContactForm(true)} />
       ) : (
@@ -531,7 +559,7 @@ export default function App() {
           <div>
             <h5 className="text-white font-semibold text-[13px] mb-3">Useful Links</h5>
             <ul className="space-y-2 text-[12.5px]">
-              <li><a href="#" className="hover:text-white">IFSC Code Finder</a></li>
+              <li><a href="#ifsc" onClick={(e) => { e.preventDefault(); setCurrentPage("ifsc"); }} className="hover:text-white">IFSC Code Finder</a></li>
               <li><a href="#" className="hover:text-white">PIN Code Finder</a></li>
               <li><a href="#" className="hover:text-white">All Banks List</a></li>
               <li><a href="#" className="hover:text-white">Bank Holidays</a></li>
