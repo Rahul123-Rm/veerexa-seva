@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from 'react'
 import {
-  Search, Sun, Download, Newspaper, FileText, Calculator, Wrench, Landmark,
+  Search, Sun, Moon, Download, Newspaper, FileText, Calculator, Wrench, Landmark,
   Shield, HeartHandshake, BookOpen, Printer, AlertCircle, Info, ChevronRight,
   PiggyBank, CircleDollarSign, TrendingUp, Receipt, FileSpreadsheet, BadgePercent, Timer, X
 } from 'lucide-react'
@@ -31,11 +31,18 @@ function AdSlot({ w, h, label }) {
   )
 }
 
-function Card({ title, viewAllHref = "#", children }) {
+function Card({ title, viewAllHref = "#", children, dm }) {
   return (
-    <div className="bg-white border border-border rounded-xl p-4">
+    <div
+      className="rounded-xl p-4"
+      style={{
+        backgroundColor: dm ? '#111827' : '#ffffff',
+        border: `1px solid ${dm ? '#374151' : '#E4E7EC'}`,
+        transition: 'background-color 0.3s ease',
+      }}
+    >
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-display font-semibold text-[15px] text-ink">{title}</h3>
+        <h3 className="font-display font-semibold text-[15px]" style={{ color: dm ? '#F3F4F6' : '#1B2430' }}>{title}</h3>
         <a href={viewAllHref} className="text-[12.5px] text-accent font-medium hover:underline">View All</a>
       </div>
       {children}
@@ -54,6 +61,26 @@ export default function App() {
   }, [currentPage])
 
   const [showContactForm, setShowContactForm] = useState(false)
+
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('veerexa_darkMode')
+      if (saved !== null) {
+        return saved === 'true'
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return false
+  })
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    localStorage.setItem('veerexa_darkMode', darkMode)
+  }, [darkMode])
 
   const bankStatusColor = s => s === "Working" ? "text-ok" : "text-rose-600"
   const bankDotColor = s => s === "Working" ? "bg-ok" : "bg-rose-600"
@@ -88,11 +115,25 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-bg">
+    <div
+      className="min-h-screen"
+      style={{
+        backgroundColor: darkMode ? '#0B1120' : '#F7F8FA',
+        color: darkMode ? '#E5E7EB' : '#1B2430',
+        transition: 'background-color 0.3s ease, color 0.3s ease',
+      }}
+    >
       <SeoSchema />
       {showContactForm && <FormModal onClose={() => setShowContactForm(false)} />}
       {/* HEADER */}
-      <header className="bg-white border-b border-border sticky top-0 z-30">
+      <header
+        className="sticky top-0 z-30"
+        style={{
+          backgroundColor: darkMode ? '#111827' : '#ffffff',
+          borderBottom: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+          transition: 'background-color 0.3s ease',
+        }}
+      >
         <div className="max-w-6xl mx-auto px-5 py-3 flex items-center gap-6">
           <div className="flex items-center gap-2 shrink-0">
             <div className="w-9 h-9 rounded-lg bg-navy flex items-center justify-center">
@@ -106,7 +147,13 @@ export default function App() {
 
           {/* SEARCH BAR */}
           <div className="flex-1 max-w-xl hidden md:block relative" ref={searchRef}>
-            <div className="flex items-center gap-2 bg-surface2 border border-border rounded-lg px-3 py-2 focus-within:border-accent transition-colors">
+            <div
+              className="flex items-center gap-2 rounded-lg px-3 py-2 transition-colors"
+              style={{
+                backgroundColor: darkMode ? '#1F2937' : '#F1F3F6',
+                border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+              }}
+            >
               <Search className="w-4 h-4 text-muted shrink-0" />
               <input
                 value={searchTerm}
@@ -124,7 +171,13 @@ export default function App() {
 
             {/* DROPDOWN RESULTS */}
             {showResults && searchTerm.length >= 2 && (
-              <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-border rounded-xl shadow-xl z-50 overflow-hidden">
+              <div
+                className="absolute top-full left-0 right-0 mt-1.5 rounded-xl shadow-xl z-50 overflow-hidden"
+                style={{
+                  backgroundColor: darkMode ? '#111827' : '#ffffff',
+                  border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+                }}
+              >
                 {searchResults.length > 0 ? (
                   <>
                     <div className="px-3 py-2 border-b border-border bg-surface2">
@@ -199,11 +252,13 @@ export default function App() {
           <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
             <a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hidden sm:inline hover:text-navy">About Us</a>
             <a href="#" onClick={(e) => { e.preventDefault(); setShowContactForm(true); }} className="hidden sm:inline hover:text-navy">Contact Us</a>
-            <Sun className="w-4 h-4 hidden sm:block hover:text-navy cursor-pointer" />
+            <button onClick={() => setDarkMode(!darkMode)} className="hidden sm:block hover:text-navy transition-colors">
+              {darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+            </button>
             <button className="bg-navy text-white text-[13px] font-medium px-4 py-1.5 rounded-md">Login</button>
           </div>
         </div>
-        <nav className="border-t border-border">
+        <nav style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}` }}>
           <div className="max-w-6xl mx-auto px-5 flex items-center gap-6 overflow-x-auto text-[13px] text-muted font-medium">
             {NAV_LINKS.map((link, i) => (
               <a
@@ -231,7 +286,7 @@ export default function App() {
       </header>
 
       {currentPage === 'software' ? (
-        <SoftwarePage />
+        <SoftwarePage darkMode={darkMode} />
       ) : currentPage === 'contact' ? (
         <ContactPage onOpenForm={() => setShowContactForm(true)} />
       ) : (
@@ -239,7 +294,7 @@ export default function App() {
 
           {/* TOP: HIGHLIGHTS + AD */}
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4">
-            <Card title="TODAY'S HIGHLIGHTS">
+            <Card title="TODAY'S HIGHLIGHTS" dm={darkMode}>
               <ul className="divide-y divide-border">
                 {HIGHLIGHTS.map((h, i) => (
                   <li key={i} className="flex items-center gap-3 py-2.5">
@@ -255,7 +310,14 @@ export default function App() {
           </div>
 
           {/* QUICK LINKS ROW */}
-          <div className="bg-white border border-border rounded-xl py-6 px-4">
+          <div
+            className="rounded-xl py-6 px-4"
+            style={{
+              backgroundColor: darkMode ? '#111827' : '#ffffff',
+              border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+              transition: 'background-color 0.3s ease',
+            }}
+          >
             <div className="grid grid-cols-3 sm:grid-cols-7 gap-4 text-center">
               {QUICK_LINKS.map((q, i) => (
                 <a
@@ -280,7 +342,7 @@ export default function App() {
 
           {/* SOFTWARE / DOWNLOADS */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card title="New Software">
+            <Card title="New Software" dm={darkMode}>
               <ul className="divide-y divide-border">
                 {newSoftware.map((s, i) => (
                   <li key={i} id={s.id} onClick={() => {
@@ -315,7 +377,7 @@ export default function App() {
               </ul>
             </Card>
 
-            <Card title="Popular Downloads">
+            <Card title="Popular Downloads" dm={darkMode}>
               <ul className="divide-y divide-border">
                 {popularDownloads.map((s, i) => (
                   <li key={i} id={s.id} onClick={() => {
@@ -350,9 +412,16 @@ export default function App() {
 
           {/* TOOLS & CALCULATORS + NEWSLETTER + AD */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="lg:col-span-2 bg-white border border-border rounded-xl p-4">
+            <div
+              className="lg:col-span-2 rounded-xl p-4"
+              style={{
+                backgroundColor: darkMode ? '#111827' : '#ffffff',
+                border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+                transition: 'background-color 0.3s ease',
+              }}
+            >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-display font-semibold text-[15px] text-ink">Tools &amp; Calculators</h3>
+                <h3 className="font-display font-semibold text-[15px] mb-3" style={{ color: darkMode ? '#F3F4F6' : '#1B2430' }}>Tools &amp; Calculators</h3>
                 <a href="#" className="text-[12.5px] text-accent font-medium hover:underline">View All</a>
               </div>
               <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 text-center">
@@ -367,8 +436,15 @@ export default function App() {
               </div>
             </div>
 
-            <div className="bg-white border border-border rounded-xl p-4">
-              <h3 className="font-display font-semibold text-[15px] text-ink mb-1.5">Stay Updated</h3>
+            <div
+              className="rounded-xl p-4"
+              style={{
+                backgroundColor: darkMode ? '#111827' : '#ffffff',
+                border: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}`,
+                transition: 'background-color 0.3s ease',
+              }}
+            >
+              <h3 className="font-display font-semibold text-[15px] mb-1.5" style={{ color: darkMode ? '#F3F4F6' : '#1B2430' }}>Stay Updated</h3>
               <p className="text-[12.5px] text-muted mb-3">Get latest updates, news and software directly in your inbox.</p>
               <div className="flex gap-2">
                 <input placeholder="Enter your email" className="flex-1 border border-border rounded-md px-3 py-2 text-[13px] outline-none focus:border-accent" />
@@ -382,7 +458,7 @@ export default function App() {
 
           {/* DATES / SCHEMES / GUIDES */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card title="Important Dates">
+            <Card title="Important Dates" dm={darkMode}>
               <ul className="space-y-2.5">
                 {IMPORTANT_DATES.map((d, i) => (
                   <li key={i} className="flex items-start gap-2.5">
@@ -396,7 +472,7 @@ export default function App() {
               </ul>
             </Card>
 
-            <Card title="Government Schemes">
+            <Card title="Government Schemes" dm={darkMode}>
               <ul className="space-y-3">
                 {GOVT_SCHEMES.map((s, i) => (
                   <li key={i} className="flex items-center gap-3">
@@ -412,7 +488,7 @@ export default function App() {
               </ul>
             </Card>
 
-            <Card title="Help & Guides">
+            <Card title="Help & Guides" dm={darkMode}>
               <ul className="space-y-3">
                 {HELP_GUIDES.map((g, i) => (
                   <li key={i} className="flex items-center gap-3">
