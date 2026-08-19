@@ -17,7 +17,7 @@ const SeoSchema = () => {
                 "downloadUrl": software.link,
                 "softwareVersion": software.version,
                 "fileSize": software.size,
-                "url": `https://veerexa.com/#${software.id}`,
+                "url": `https://kiosk-software.veerexa.com/#${software.id}`,
                 "offers": {
                     "@type": "Offer",
                     "price": "0",
