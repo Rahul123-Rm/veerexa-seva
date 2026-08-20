@@ -274,6 +274,7 @@ export default function App() {
 
           <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
             <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hidden sm:inline hover:text-navy">About Us</a>
+            <a href="https://help.bankingdevice.com/" target="_blank" rel="noopener noreferrer" className="hidden sm:inline hover:text-navy">GPS Driver</a>
             <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hidden sm:inline hover:text-navy">Help Center</a>
             <button onClick={() => setDarkMode(!darkMode)} className="hidden sm:block hover:text-navy transition-colors">
               {darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
@@ -286,7 +287,9 @@ export default function App() {
             {NAV_LINKS.map((link, i) => (
               <a
                 key={link}
-                href={link === "Home" ? "/" : link === "Software" ? "#software" : link === "IFSC Code" ? "#ifsc" : link === "Help Center" ? "#contact" : "#"}
+                href={link === "Home" ? "/" : link === "Software" ? "#software" : link === "GPS Driver" ? "https://help.bankingdevice.com/" : link === "IFSC Code" ? "#ifsc" : link === "Help Center" ? "#contact" : "#"}
+                target={link === "GPS Driver" ? "_blank" : undefined}
+                rel={link === "GPS Driver" ? "noopener noreferrer" : undefined}
                 onClick={(e) => {
                   if (link === "Software") {
                     e.preventDefault();
@@ -560,6 +563,7 @@ export default function App() {
             <h5 className="text-white font-semibold text-[13px] mb-3">Useful Links</h5>
             <ul className="space-y-2 text-[12.5px]">
               <li><a href="#ifsc" onClick={(e) => { e.preventDefault(); setCurrentPage("ifsc"); }} className="hover:text-white">IFSC Code Finder</a></li>
+              <li><a href="https://help.bankingdevice.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white">GPS Driver</a></li>
               <li><a href="#" className="hover:text-white">PIN Code Finder</a></li>
               <li><a href="#" className="hover:text-white">All Banks List</a></li>
               <li><a href="#" className="hover:text-white">Bank Holidays</a></li>
