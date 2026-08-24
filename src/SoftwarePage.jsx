@@ -7,6 +7,7 @@ const BANKS = [
     { id: 'Bank of Baroda', label: 'BOB' },
     { id: 'Bank of India', label: 'BOI' },
     { id: 'PNB', label: 'PNB' },
+    { id: 'MPGB', label: 'MPGB' },
     { id: 'Common Utilities', label: 'Other Tools' }
 ]
 
