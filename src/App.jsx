@@ -12,6 +12,7 @@ import SoftwarePage from './SoftwarePage.jsx'
 import IfscCodePage from './IfscCodePage.jsx'
 import SeoSchema from './SeoSchema.jsx'
 import ContactPage, { FormModal } from './ContactPage.jsx'
+import AdBanner from './AdBanner.jsx'
 
 const ICONS = {
   Download, Newspaper, FileText, Calculator, Wrench, Search, Landmark,
@@ -91,7 +92,7 @@ export default function App() {
       if (saved !== null) {
         return saved === 'true'
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
+      return false
     }
     return false
   })
@@ -337,7 +338,7 @@ export default function App() {
               </ul>
             </Card>
 
-            <AdSlot w={300} h={250} />
+            <AdBanner />
           </div>
 
           {/* QUICK LINKS ROW */}
