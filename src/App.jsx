@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import {
   Search, Sun, Moon, Download, Newspaper, FileText, Calculator, Wrench, Landmark,
   Shield, HeartHandshake, BookOpen, Printer, AlertCircle, Info, ChevronRight,
@@ -276,6 +276,7 @@ export default function App() {
           <div className="flex items-center gap-5 ml-auto text-[13px] text-muted font-medium">
             <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hidden sm:inline hover:text-navy">About Us</a>
             <a href="https://help.bankingdevice.com/" target="_blank" rel="noopener noreferrer" className="hidden sm:inline hover:text-navy">GPS Driver</a>
+            <button onClick={() => { const a = document.createElement('a'); a.href = 'https://drive.usercontent.google.com/download?id=1A4Kin0UEh41OrKvJibSsyoOezrAODuU3&export=download&confirm=t'; a.target = '_blank'; a.rel = 'noopener noreferrer'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }} className="hidden sm:inline-flex items-center gap-1.5 bg-accent hover:bg-accent/90 text-white text-[12px] font-semibold px-3 py-1 rounded-md transition-colors shadow-sm"><Download className="w-3.5 h-3.5" />NICT Remote Desk</button>
             <a href="#contact" onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }} className="hidden sm:inline hover:text-navy">Help Center</a>
             <button onClick={() => setDarkMode(!darkMode)} className="hidden sm:block hover:text-navy transition-colors">
               {darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
@@ -286,8 +287,8 @@ export default function App() {
         <nav style={{ borderTop: `1px solid ${darkMode ? '#374151' : '#E4E7EC'}` }}>
           <div className="max-w-6xl mx-auto px-5 flex items-center gap-6 overflow-x-auto text-[13px] text-muted font-medium">
             {NAV_LINKS.map((link, i) => (
+              <React.Fragment key={link}>
               <a
-                key={link}
                 href={link === "Home" ? "/" : link === "Software" ? "#software" : link === "GPS Driver" ? "https://help.bankingdevice.com/" : link === "IFSC Code" ? "#ifsc" : link === "Help Center" ? "#contact" : "#"}
                 target={link === "GPS Driver" ? "_blank" : undefined}
                 rel={link === "GPS Driver" ? "noopener noreferrer" : undefined}
@@ -310,6 +311,15 @@ export default function App() {
               >
                 {link}
               </a>
+              {link === "IFSC Code" && (
+                <button
+                  onClick={() => { const a = document.createElement('a'); a.href = 'https://drive.usercontent.google.com/download?id=1A4Kin0UEh41OrKvJibSsyoOezrAODuU3&export=download&confirm=t'; a.target = '_blank'; a.rel = 'noopener noreferrer'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }}
+                  className="py-2.5 whitespace-nowrap border-b-2 border-transparent hover:text-navy flex items-center gap-1"
+                >
+                  <Download className="w-3.5 h-3.5" />NICT Remote Desk
+                </button>
+              )}
+              </React.Fragment>
             ))}
           </div>
         </nav>
